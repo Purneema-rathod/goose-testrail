@@ -1,0 +1,76 @@
+name: testrail
+version: 0.1.0
+description: TestRail integration for Goose
+author: Purnee Marathod
+homepage: https://github.com/block/goose
+repository: https://github.com/block/goose
+
+config:
+  schema:
+    type: object
+    properties:
+      base_url:
+        type: string
+        description: TestRail instance URL (e.g., https://your-instance.testrail.io)
+        default: https://afterpay.testrail.io
+      username:
+        type: string
+        description: TestRail username or email
+      password:
+        type: string
+        description: TestRail password or API key
+        secret: true
+
+tools:
+  - name: get_run
+    description: Get details of a test run by ID
+    python_function: testrail.get_run
+    parameters:
+      type: object
+      properties:
+        run_id:
+          type: integer
+          description: ID of the test run to retrieve
+
+  - name: get_tests
+    description: Get all tests in a test run
+    python_function: testrail.get_tests
+    parameters:
+      type: object
+      properties:
+        run_id:
+          type: integer
+          description: ID of the test run to retrieve tests from
+
+  - name: get_results_for_test
+    description: Get test results for a specific test
+    python_function: testrail.get_results_for_test
+    parameters:
+      type: object
+      properties:
+        test_id:
+          type: integer
+          description: ID of the test to retrieve results for
+
+  - name: get_failed_and_blocked
+    description: Get all failed and blocked tests from a test run
+    python_function: testrail.get_failed_and_blocked
+    parameters:
+      type: object
+      properties:
+        run_id:
+          type: integer
+          description: ID of the test run to analyze
+
+  - name: export_to_spreadsheet
+    description: Export test results to a Google Sheet
+    python_function: testrail.export_to_spreadsheet
+    parameters:
+      type: object
+      properties:
+        run_id:
+          type: integer
+          description: ID of the test run to export
+        spreadsheet_id:
+          type: string
+          description: ID of the Google Sheet to update
