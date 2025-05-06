@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "goose-testrail"
-version = "0.1.0"
+version = "0.2.0"
 description = "TestRail extension for Goose"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -14,8 +14,9 @@ authors = [
     { name = "Purneema Rathod", email = "purneema@squareup.com" }
 ]
 dependencies = [
-    "testrail-api>=1.0",
-    "mcp>=1.4.1",  # Updated from goose-mcp to mcp
+    "testrail-api>=1.13.2",
+    "mcp>=1.4.1",
+    "requests>=2.31.0"
 ]
 
 [project.optional-dependencies]
@@ -26,8 +27,8 @@ test = [
 dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
-    "build",
-    "twine",
+    "build>=1.0.0",
+    "twine>=4.0.0",
 ]
 
 [tool.pytest.ini_options]
