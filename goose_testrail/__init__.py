@@ -1,6 +1,6 @@
 """TestRail extension for Goose."""
 from typing import Any, Dict, List, Optional
-from goose_mcp import Extension, Tool
+from mcp import Extension, Tool  # Updated from goose_mcp to mcp
 
 class TestRailExtension(Extension):
     """TestRail extension for Goose."""

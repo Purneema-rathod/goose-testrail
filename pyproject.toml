@@ -15,7 +15,7 @@ authors = [
 ]
 dependencies = [
     "testrail-api>=1.0",
-    "goose-mcp>=0.1.0",
+    "mcp>=1.4.1",  # Updated from goose-mcp to mcp
 ]
 
 [project.optional-dependencies]

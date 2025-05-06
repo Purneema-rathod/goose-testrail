@@ -11,25 +11,25 @@ def test_initialization():
     assert extension.username is None
     assert extension.api_key is None
 
-def test_initialization_with_config():
+@patch('goose_testrail.TestRailAPI')
+def test_initialization_with_config(mock_api):
     """Test extension initialization with configuration."""
-    with patch('goose_testrail.TestRailAPI') as mock_api:
-        extension = TestRailExtension()
-        config = {
-            "base_url": "https://example.testrail.io",
-            "username": "test_user",
-            "api_key": "test_key"
-        }
-        extension.initialize(config)
-        
-        assert extension.base_url == config["base_url"]
-        assert extension.username == config["username"]
-        assert extension.api_key == config["api_key"]
-        mock_api.assert_called_once_with(
-            base_url=config["base_url"],
-            username=config["username"],
-            password=config["api_key"]
-        )
+    extension = TestRailExtension()
+    config = {
+        "base_url": "https://example.testrail.io",
+        "username": "test_user",
+        "api_key": "test_key"
+    }
+    extension.initialize(config)
+    
+    assert extension.base_url == config["base_url"]
+    assert extension.username == config["username"]
+    assert extension.api_key == config["api_key"]
+    mock_api.assert_called_once_with(
+        base_url=config["base_url"],
+        username=config["username"],
+        password=config["api_key"]
+    )
 
 def test_initialization_missing_config():
     """Test extension initialization with missing configuration."""
