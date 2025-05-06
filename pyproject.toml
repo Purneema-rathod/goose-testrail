@@ -11,7 +11,7 @@ requires-python = ">=3.8"
 license = "MIT"
 keywords = ["goose", "testrail", "testing"]
 authors = [
-    { name = "Your Name", email = "your.email@example.com" }
+    { name = "Purneema Rathod", email = "purneema@squareup.com" }
 ]
 dependencies = [
     "testrail-api>=1.0",
