@@ -13,6 +13,16 @@ keywords = ["goose", "testrail", "testing"]
 authors = [
     { name = "Purneema Rathod", email = "purneema@squareup.com" }
 ]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
 dependencies = [
     "testrail-api>=1.13.2",
     "mcp>=1.4.1",
@@ -38,3 +48,6 @@ addopts = "-v --cov=goose_testrail --cov-report=term-missing"
 
 [project.entry-points.goose_extensions]
 testrail = "goose_testrail:TestRailExtension"
+
+[tool.hatch.build.targets.wheel]
+packages = ["goose_testrail"]

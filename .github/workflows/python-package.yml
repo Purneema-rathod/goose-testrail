@@ -30,6 +30,11 @@ jobs:
     - name: List installed packages
       run: |
         python -m pip list
+        python -m pip show goose-testrail
+    - name: Show project structure
+      run: |
+        pwd
+        ls -R
     - name: Test with pytest
       run: |
         python -m pytest tests/ -v --cov=goose_testrail --cov-report=term-missing
