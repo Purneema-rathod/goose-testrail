@@ -1,144 +1,83 @@
-# TestRail Extension for Goose
+# Goose TestRail Extension
 
-This extension provides integration with TestRail, allowing you to retrieve and analyze test results, and export them to Google Sheets.
+This extension provides integration with TestRail for the Goose AI assistant. It allows you to interact with TestRail projects, test cases, test runs, and results directly through Goose.
 
 ## Installation
 
-There are several ways to install this extension:
-
-### 1. From GitHub (Recommended)
+1. Install the extension:
 ```bash
-pip install git+https://github.com/YOUR_USERNAME/goose-testrail.git
+pip install goose-testrail
 ```
 
-### 2. From Local Directory
-```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/goose-testrail.git
-
-# Install in development mode
-cd goose-testrail
-pip install -e .
-```
-
-### 3. Manual Installation
-1. Download the extension files
-2. Copy them to your Goose extensions directory (typically `~/.goose/extensions/testrail`)
-3. Enable the extension in Goose settings
-
-## Configuration
-
-The extension requires the following configuration:
-
+2. Configure the extension in your Goose configuration:
 ```yaml
-testrail:
-  base_url: https://your-instance.testrail.io
-  username: your-email@example.com
-  password: your-api-key  # Use an API key instead of password for better security
+extensions:
+  testrail:
+    base_url: "https://your-instance.testrail.io"
+    username: "your-username"
+    api_key: "your-api-key"
 ```
 
-## Available Tools
+## Features
 
-### get_run
+The extension provides the following capabilities:
 
-Get details of a test run by ID.
+- List TestRail projects
+- Get test cases for a project/suite
+- Create test runs
+- Add test results
 
-```python
-result = get_run(run_id=12345)
-```
+## Usage
 
-### get_tests
-
-Get all tests in a test run.
-
-```python
-tests = get_tests(run_id=12345)
-```
-
-### get_results_for_test
-
-Get test results for a specific test.
+Once installed and configured, you can use the extension through Goose with commands like:
 
 ```python
-results = get_results_for_test(test_id=67890)
-```
+# Get all projects
+projects = testrail.get_projects()
 
-### get_failed_and_blocked
+# Get test cases for a project
+cases = testrail.get_test_cases(project_id=1, suite_id=2)
 
-Get all failed and blocked tests from a test run.
+# Create a test run
+run = testrail.create_test_run(
+    project_id=1,
+    name="Automated Test Run",
+    suite_id=2,
+    description="Created via Goose"
+)
 
-```python
-results = get_failed_and_blocked(run_id=12345)
-print(f"Failed tests: {len(results['failed'])}")
-print(f"Blocked tests: {len(results['blocked'])}")
-```
-
-### export_to_spreadsheet
-
-Export test results to a Google Sheet.
-
-```python
-result = export_to_spreadsheet(
-    run_id=12345,
-    spreadsheet_id="your-google-sheet-id"
+# Add a test result
+result = testrail.add_test_result(
+    test_id=100,
+    status_id=1,  # 1=Passed
+    comment="Test passed successfully"
 )
 ```
 
-## Example Usage
+## Status IDs
 
-Here's an example of how to use the extension to analyze test results and export them to a spreadsheet:
+When adding test results, use these status IDs:
 
-```python
-# Get failed and blocked tests
-results = get_failed_and_blocked(run_id=12345)
-
-# Export to Google Sheet
-export_to_spreadsheet(
-    run_id=12345,
-    spreadsheet_id="your-google-sheet-id"
-)
-```
+- 1 = Passed
+- 2 = Blocked
+- 3 = Untested
+- 4 = Retest
+- 5 = Failed
 
 ## Development
 
 To contribute to this extension:
 
 1. Clone the repository
+2. Install development dependencies:
 ```bash
-git clone https://github.com/YOUR_USERNAME/goose-testrail.git
+pip install -e ".[dev]"
 ```
-
-2. Create a virtual environment
+3. Run tests:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+pytest
 ```
-
-3. Install development dependencies
-```bash
-pip install -e .
-```
-
-4. Make your changes and test them
-
-5. Submit a pull request
-
-## Troubleshooting
-
-If you encounter any issues:
-
-1. Ensure your TestRail credentials are correct
-2. Check that you have the required permissions in TestRail
-3. Verify your network connection and TestRail instance accessibility
-4. Check the Goose logs for detailed error messages
-
-## Support
-
-For support:
-1. Open an issue on GitHub
-2. Contact the maintainer at purneemarathod@gmail.com
-3. Check the Goose documentation
 
 ## License
 
-This extension is part of the Goose project and is licensed under the same terms.
+This project is licensed under the MIT License - see the LICENSE file for details.
